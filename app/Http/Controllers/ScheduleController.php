@@ -15,11 +15,14 @@ class ScheduleController extends Controller
     $events = [];
     foreach ($schedules as $schedule) {
       $events[] = [
-        'id' => $schedule->id,
-        'title' => $schedule->title,
+        'id'          => $schedule->id,
+        'title'       => $schedule->title,
         'description' => $schedule->description,
-        'start' => $schedule->start_date,
-        'end' => Carbon::parse($schedule->end_date)->addDay()->format('Y-m-d'),
+        'start'       => $schedule->start_date . ' 07:00:00',
+        'end'         => $schedule->end_date . ' 08:00:00',
+        'backgroundColor' => 'red',
+        'textColor' => 'yellow',
+        'borderColor' => 'black',
       ];
     }
     return view('schedules.index', compact('events'));
