@@ -69,8 +69,42 @@
             html: true
           });
         },
+        editable: true,
+        eventDrop: function(info) {
+          updateEvent(info);
+        },
+        eventResize: function(info) {
+          updateEvent(info);
+        },
       });
       calendar.render();
     });
+
+    function updateEvent(info) {
+      const id = info.event.id;
+      const start = info.event.start.toLocaleString('ja-JP');
+      const end = info.event.end.toLocaleString('ja-JP');
+
+      $.ajax({
+        url: '/schedules/' + id + '/updateByCalendar',
+        type: 'PUT',
+        data: {
+          id: info.event.id,
+          start_date: start,
+          end_date: end,
+          _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+          if (response.success) {
+            console.log('Event Updated');
+          } else {
+            alert('Error occurred');
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          alert('AJAX error: ' + textStatus + ' - ' + errorThrown);
+        }
+      });
+    }
   </script>
 @endsection
