@@ -17,6 +17,19 @@
 @endsection
 
 @section('script')
+  <style>
+		.fc-col-header-cell-cushion,
+		.fc-daygrid-day-number {
+			color: #333;
+			text-decoration: none;
+		}
+		.fc-col-header-cell.fc-day-sat {
+			background-color: #9ecef5;
+		}
+		.fc-col-header-cell.fc-day-sun {
+			background-color: #f4d0df;
+		}
+	</style>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
